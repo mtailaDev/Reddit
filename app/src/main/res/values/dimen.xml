@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--// common list_item_ dimensions-->
+    <dimen name="list_item_container_margin">8dp</dimen>
+    <dimen name="list_item_container_elevation">1dp</dimen>
+    <dimen name="list_item_container_corner_radius">8dp</dimen>
+    <dimen name="list_item_title_text_size">16sp</dimen>
+    <dimen name="list_item_sub_title_text_size">14sp</dimen>
+
+    <!--// list_item_post dimens-->
+    <dimen name="post_thumbnail">160dp</dimen>
+    <dimen name="post_margin">8dp</dimen>
+    <dimen name="post_title_margin_top">16dp</dimen>
+    <dimen name="post_title_margin_end">16dp</dimen>
+    <dimen name="post_title_margin_start">16dp</dimen>
+    <dimen name="post_subreddit_margin_top">16dp</dimen>
+    <dimen name="post_subreddit_margin_end">16dp</dimen>
+    <dimen name="post_subreddit_margin_bottom">16dp</dimen>
+    <dimen name="post_score_value_margin">8dp</dimen>
+
+    <!--// list_item_subreddit dimens-->
+    <dimen name="subreddit_thumbnail_square">72dp</dimen>
+    <dimen name="subreddit_thumbnail_margin">16dp</dimen>
+    <dimen name="subreddit_chevron_sqaure">32dp</dimen>
+    <dimen name="subreddit_chevron_margin_end">16dp</dimen>
+    <dimen name="subreddit_text_views_margin_start">16dp</dimen>
+    <dimen name="subreddit_text_views_margin_end">16dp</dimen>
+
+</resources>

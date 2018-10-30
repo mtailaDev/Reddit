@@ -6,4 +6,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ListItemContainerTheme" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/list_item_container_margin</item>
+        <item name="cardCornerRadius">@dimen/list_item_container_corner_radius</item>
+        <item name="cardElevation">@dimen/list_item_container_elevation</item>
+    </style>
+
 </resources>
