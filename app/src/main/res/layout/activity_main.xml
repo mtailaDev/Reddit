@@ -9,23 +9,12 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/stubPlaceholder"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/colorAccent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <FrameLayout android:id="@+id/main_fl_fragmentContainer"
                      android:layout_width="0dp"
                      android:layout_height="0dp"
                      app:layout_constraintStart_toStartOf="parent"
                      app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintTop_toBottomOf="@+id/stubPlaceholder"
+                     app:layout_constraintTop_toTopOf="parent"
                      app:layout_constraintBottom_toBottomOf="parent">
         </FrameLayout>
 
