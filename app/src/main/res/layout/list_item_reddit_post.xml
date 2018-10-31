@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+                name="post"
+                type="com.example.matthewtaila.redditstockx.feed.model.Post"/>
+    </data>
+
     <com.google.android.material.card.MaterialCardView
             style="@style/ListItemContainerTheme">
 
@@ -16,7 +23,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_margin="@dimen/post_margin"
+                    android:scaleType="centerCrop"
                     tools:visibility="gone"
+                    android:visibility="gone"
+                    showThumbnail="@{post.thumbnailControl}"
+                    thumbnail="@{post.thumbnail}"
                     app:layout_constraintVertical_chainStyle="spread"/>
 
             <androidx.constraintlayout.widget.Guideline
@@ -48,6 +59,7 @@
                     android:layout_marginTop="@dimen/post_title_margin_top"
                     android:layout_marginEnd="@dimen/post_title_margin_end"
                     android:maxLines="3"
+                    android:text="@{post.title}"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/list_item_title_text_size"/>
@@ -65,9 +77,9 @@
                     android:layout_marginBottom="@dimen/post_subreddit_margin_bottom"
                     android:layout_marginEnd="@dimen/post_subreddit_margin_end"
                     android:maxLines="1"
-                    app:layout_constraintVertical_bias="0.95"
+                    appendSubreddit="@{post.subreddit}"
                     android:ellipsize="end"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorAccent"
                     android:textSize="@dimen/list_item_sub_title_text_size"/>
 
             <TextView
@@ -79,6 +91,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:maxLines="1"
+                    postScore="@{post.score}"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/list_item_sub_title_text_size"
