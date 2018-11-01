@@ -1,4 +1,4 @@
-package com.example.matthewtaila.redditstockx.common
+package com.example.matthewtaila.redditstockx.common.network
 
 import com.example.matthewtaila.redditstockx.feed.model.PostFeed
 import io.reactivex.Single

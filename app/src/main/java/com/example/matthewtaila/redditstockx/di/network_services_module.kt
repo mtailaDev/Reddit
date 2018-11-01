@@ -1,6 +1,6 @@
 package com.example.matthewtaila.redditstockx.di
 
-import com.example.matthewtaila.redditstockx.common.IRedditAPI
+import com.example.matthewtaila.redditstockx.common.network.IRedditAPI
 import com.example.matthewtaila.redditstockx.common.network.ConnectivityInterceptor
 import com.example.matthewtaila.redditstockx.common.network.PostFeedDeserializer
 import com.example.matthewtaila.redditstockx.feed.model.PostFeed
