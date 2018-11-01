@@ -9,13 +9,38 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
-        <FrameLayout android:id="@+id/main_fl_fragmentContainer"
-                     android:layout_width="0dp"
-                     android:layout_height="0dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintTop_toTopOf="parent"
-                     app:layout_constraintBottom_toBottomOf="parent">
+        <EditText
+                android:id="@+id/main_et_subredditValue"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/main_iv_subredditSearch"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@android:color/transparent"
+                android:hint="@string/search_box_hint"
+                android:paddingStart="16dp"
+                android:maxLines="1"
+                android:textColor="@android:color/black"/>
+
+        <ImageView android:id="@+id/main_iv_subredditSearch"
+                   android:layout_width="wrap_content"
+                   android:layout_height="56dp"
+                   app:layout_constraintStart_toEndOf="@+id/main_et_subredditValue"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:srcCompat="@drawable/ic_search"
+                   android:background="@android:color/transparent"
+                   android:paddingEnd="8dp"
+                   android:paddingStart="8dp"/>
+
+        <FrameLayout
+                android:id="@+id/main_fl_fragmentContainer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                app:layout_constraintBottom_toBottomOf="parent">
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
