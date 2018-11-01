@@ -1,5 +1,6 @@
 package com.example.matthewtaila.redditstockx.feed.model
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil

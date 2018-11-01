@@ -19,8 +19,4 @@ class RedditApp : Application(){
         startKoin(this, listOf(networkServiceModule))
     }
 
-    fun hasConnection(): Boolean? {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
-    }
 }
