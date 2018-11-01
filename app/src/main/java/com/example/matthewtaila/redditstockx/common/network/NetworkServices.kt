@@ -13,10 +13,12 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 // todo - introduce Koin for DI
-object NetworkServices {
+class NetworkServices {
 
-    private const val NO_INTERNET_CONNECTION_ERROR = "No Internet Connection"
-    private const val Base_URL = "https://www.reddit.com/"
+    companion object {
+        const val NO_INTERNET_CONNECTION_ERROR = "No Internet Connection"
+        const val Base_URL = "https://www.reddit.com/"
+    }
 
     fun getRedditServices(): IRedditAPI {
 
