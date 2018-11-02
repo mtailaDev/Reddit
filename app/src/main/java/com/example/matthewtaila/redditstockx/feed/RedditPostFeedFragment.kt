@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
 import com.example.matthewtaila.redditstockx.databinding.FragmentRedditPostFeedBinding
 import com.example.matthewtaila.redditstockx.feed.model.PostFeedAdapter
@@ -18,6 +20,7 @@ class RedditPostFeedFragment : Fragment() {
 
     private lateinit var mBinding: FragmentRedditPostFeedBinding
     private lateinit var redditPostViewModel: RedditFeedViewModel
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     companion object {
         @JvmStatic
@@ -29,6 +32,7 @@ class RedditPostFeedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         redditPostViewModel = ViewModelProviders.of(this)[RedditFeedViewModel::class.java]
+        mainActivityViewModel = ViewModelProviders.of(activity!!)[MainActivityViewModel::class.java]
         observeLiveData()
     }
 
@@ -45,10 +49,13 @@ class RedditPostFeedFragment : Fragment() {
     fun observeLiveData() {
         redditPostViewModel.postList.observe(this, Observer {
             if (it.postDataList.isNotEmpty()){
-                val mAdapter = PostFeedAdapter(it)
+                val mAdapter = PostFeedAdapter(it, mainActivityViewModel)
                 feed_rv_posts.adapter = mAdapter
                 feed_rv_posts.layoutManager = LinearLayoutManager(context)
             }
+        })
+        mainActivityViewModel.selectedURL.observe(this, Observer {
+            Navigation.createNavigateOnClickListener(R.id.action_redditPostFeedFragment_to_detailedPostFragment, null).onClick(view)
         })
     }
 
