@@ -22,13 +22,6 @@ class RedditPostFeedFragment : Fragment() {
     private lateinit var redditPostViewModel: RedditFeedViewModel
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
-    companion object {
-        @JvmStatic
-        fun newInstance(): RedditPostFeedFragment {
-            return RedditPostFeedFragment()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         redditPostViewModel = ViewModelProviders.of(this)[RedditFeedViewModel::class.java]
@@ -56,6 +49,9 @@ class RedditPostFeedFragment : Fragment() {
         })
         mainActivityViewModel.selectedURL.observe(this, Observer {
             Navigation.createNavigateOnClickListener(R.id.action_redditPostFeedFragment_to_detailedPostFragment, null).onClick(view)
+        })
+        mainActivityViewModel.subReddit.observe(this, Observer {
+            Navigation.createNavigateOnClickListener(R.id.action_redditPostFeedFragment_to_subredditsResultFragment, null).onClick(view)
         })
     }
 
