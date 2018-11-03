@@ -3,7 +3,9 @@ package com.example.matthewtaila.redditstockx.di
 import com.example.matthewtaila.redditstockx.common.network.IRedditAPI
 import com.example.matthewtaila.redditstockx.common.network.ConnectivityInterceptor
 import com.example.matthewtaila.redditstockx.common.network.PostFeedDeserializer
+import com.example.matthewtaila.redditstockx.common.network.SubredditDeserializer
 import com.example.matthewtaila.redditstockx.feed.model.PostFeed
+import com.example.matthewtaila.redditstockx.subreddits.model.SubredditSearchResult
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -40,7 +42,10 @@ val baseUrl: String = "https://www.reddit.com/"
     }
 
     private fun getCustomGson(): Gson {
-        return GsonBuilder().registerTypeAdapter(PostFeed::class.java, PostFeedDeserializer()).create()
+        return GsonBuilder()
+            .registerTypeAdapter(PostFeed::class.java, PostFeedDeserializer())
+            .registerTypeAdapter(SubredditSearchResult::class.java, SubredditDeserializer())
+            .create()
     }
 
     private fun getRetrofit(okHttpClient: OkHttpClient, gson: Gson, baseUrl: String): Retrofit {

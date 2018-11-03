@@ -3,8 +3,15 @@ package com.example.matthewtaila.redditstockx
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.matthewtaila.redditstockx.common.network.IRedditAPI
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 
-class MainActivityViewModel : ViewModel(){
+class MainActivityViewModel : ViewModel(), KoinComponent{
+
+
 
     val subReddit = MutableLiveData<String>()
     val selectedURL = MutableLiveData<String>()
@@ -13,9 +20,7 @@ class MainActivityViewModel : ViewModel(){
         selectedURL.value = url
     }
 
-    fun searchForSubreddit(searchTerm: String) {
-        Log.i("Search Term", searchTerm)
-        // todo - subReddit.val = searchTerm
-
+    fun handleSubRedditSearchValue(searchTerm: String) {
+        subReddit.value = searchTerm
     }
 }

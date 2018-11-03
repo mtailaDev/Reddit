@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
 import com.example.matthewtaila.redditstockx.databinding.ActivityMainBinding
-import com.example.matthewtaila.redditstockx.feed.RedditPostFeedFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (view.id){
             R.id.main_iv_subredditSearch ->{
                 if (main_et_subredditValue.text.toString().isNotEmpty())
-                    mainActivityViewModel.searchForSubreddit(main_et_subredditValue.text.toString())
+                    mainActivityViewModel.handleSubRedditSearchValue(main_et_subredditValue.text.toString())
                 else Toast.makeText(this, getString(R.string.search_box_empty_error), Toast.LENGTH_LONG).show()
             }
         }
