@@ -38,7 +38,6 @@ class SubredditsResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoadingState()
-
         subredditsSearchViewModel.searchSubreddits(mainActivityViewModel.subReddit.value)
     }
 
@@ -56,7 +55,6 @@ class SubredditsResultFragment : Fragment() {
             }else {
                 hideLoadingState()
                 showEmptyErrorState()
-
             }
 
         })
