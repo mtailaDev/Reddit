@@ -37,27 +37,46 @@ class SubredditsResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subreddit_tv_error.visibility = View.GONE
+        showLoadingState()
+
         subredditsSearchViewModel.searchSubreddits(mainActivityViewModel.subReddit.value)
+    }
+
+    private fun showLoadingState() {
+        subreddit_rv_results.visibility = View.INVISIBLE
+        subreddit_tv_error.visibility = View.GONE
+        subreddit_lav_loading.visibility = View.VISIBLE
     }
 
     private fun observeLiveData() {
         subredditsSearchViewModel.subredditResults.observe(this, Observer {
-            if (it.dataList.isNotEmpty()) setupRecyclerView(it) else showEmptyErrorState()
+            if (it.dataList.isNotEmpty()) {
+                hideLoadingState()
+                setupRecyclerView(it)
+            }else {
+                hideLoadingState()
+                showEmptyErrorState()
+
+            }
 
         })
         mainActivityViewModel.subReddit.observe(this, Observer {
-            subreddit_tv_error.visibility = View.GONE
-            subreddit_rv_results.visibility = View.VISIBLE
-            // todo show loading state
+            showLoadingState()
             subredditsSearchViewModel.searchSubreddits(it)
         })
     }
 
+    private fun hideLoadingState() {
+        subreddit_lav_loading.visibility = View.GONE
+    }
+
     private fun setupRecyclerView(searchResult: SubredditSearchResult) {
+        subreddit_rv_results.visibility = View.INVISIBLE
+        subreddit_rv_results.alpha = 1f
         val mAdapter = SubredditSearchAdapter(searchResult, mainActivityViewModel)
         subreddit_rv_results.adapter = mAdapter
         subreddit_rv_results.layoutManager = LinearLayoutManager(context)
+        subreddit_rv_results.visibility = View.VISIBLE
     }
 
     private fun showEmptyErrorState() {

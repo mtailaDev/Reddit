@@ -13,7 +13,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:visibility="gone"/>
+                tools:visibility="gone"
+                android:alpha="0"/>
 
         <TextView
                 android:id="@+id/subreddit_tv_error"
@@ -29,6 +30,19 @@
                 android:text="@string/subreddit_search_no_resutls"
                 android:paddingEnd="48dp"
                 android:paddingStart="48dp"
+                android:visibility="gone"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/subreddit_lav_loading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_fileName="loading_state.json"
                 android:visibility="gone"/>
 
 
