@@ -9,13 +9,18 @@
     <fragment android:id="@+id/redditPostFeedFragment"
               android:name="com.example.matthewtaila.redditstockx.feed.RedditPostFeedFragment"
               android:label="RedditPostFeedFragment">
-        <argument
-                android:name="url"
-                android:defaultValue="http://www.reddit.com"></argument>
         <action android:id="@+id/action_redditPostFeedFragment_to_detailedPostFragment"
                 app:destination="@id/detailedPostFragment"/>
+        <action android:id="@+id/action_redditPostFeedFragment_to_subredditsResultFragment"
+                app:destination="@id/subredditsResultFragment"/>
     </fragment>
     <fragment android:id="@+id/detailedPostFragment"
               android:name="com.example.matthewtaila.redditstockx.DetailedPost.DetailedPostFragment"
               android:label="DetailedPostFragment"/>
+    <fragment android:id="@+id/subredditsResultFragment"
+              android:name="com.example.matthewtaila.redditstockx.subreddits.SubredditsResultFragment"
+              android:label="SubredditsResultFragment">
+        <action android:id="@+id/action_subredditsResultFragment_to_redditPostFeedFragment"
+                app:destination="@id/redditPostFeedFragment"/>
+    </fragment>
 </navigation>
