@@ -4,4 +4,6 @@
     <!--// subreddit search related string resources-->
     <string name="search_box_hint">Search Subreddits</string>
     <string name="search_box_empty_error">Oops, looks like you left this empty</string>
+    <string name="subreddit_search_no_resutls">Oops, we can\'t find a subreddit matching your search results. Please check your spelling</string>
+
 </resources>
