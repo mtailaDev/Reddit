@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         })
         mainActivityViewModel.selectedSubreddit.observe(this, Observer {
             mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Hot.order
-            resetToOrderHot()
             supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance())
@@ -116,6 +115,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             if (it) {
                 main_ordering_group.resetOrderingTextViews()
                 activateOrderingGroupListener()
+                resetToOrderHot()
             } else {
                 main_ordering_group.inactiveOrderingTextView()
                 inactivateOrderingGroupListener()
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun resetToOrderHot() {
-        main_tv_orderHot.setTextColor(ContextCompat.getColor(this, R.color.ordering_active))
+        main_tv_orderHot.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
     }
 
 
