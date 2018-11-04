@@ -15,7 +15,7 @@ class MainActivityViewModel : ViewModel(), KoinComponent{
     val selectedURL = MutableLiveData<String>()
     val selectedSubreddit = MutableLiveData<String>()
 
-    fun handleSelectedPost(url : String){
+    fun selectDetailedPost(url : String){
         selectedURL.value = url
     }
 

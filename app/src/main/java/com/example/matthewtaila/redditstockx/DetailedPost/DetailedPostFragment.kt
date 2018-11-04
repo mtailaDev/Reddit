@@ -20,16 +20,21 @@ class DetailedPostFragment : Fragment() {
     private lateinit var mBinding: FragmentDetailedPostBinding
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
+    companion object {
+        @JvmStatic
+        fun newInstance(): DetailedPostFragment {
+            return DetailedPostFragment()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivityViewModel = ViewModelProviders.of(activity!!)[MainActivityViewModel::class.java]
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showWebView()
-
     }
 
     private fun showWebView() {
@@ -41,7 +46,6 @@ class DetailedPostFragment : Fragment() {
             }
         }
         detailedFrag_wv_url.loadUrl(mainActivityViewModel.selectedURL.value)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

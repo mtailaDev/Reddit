@@ -31,7 +31,7 @@ class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel)
         vh.bind(postFeed.postDataList[position])
         vh.itemBinding.root.setOnClickListener {
             postFeed.postDataList[position].url?.let {
-                mainVM.handleSelectedPost(it)
+                mainVM.selectDetailedPost(it)
             }
         }
     }

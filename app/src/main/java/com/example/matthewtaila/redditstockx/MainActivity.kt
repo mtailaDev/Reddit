@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.matthewtaila.redditstockx.DetailedPost.DetailedPostFragment
 import com.example.matthewtaila.redditstockx.databinding.ActivityMainBinding
 import com.example.matthewtaila.redditstockx.feed.RedditPostFeedFragment
 import com.example.matthewtaila.redditstockx.subreddits.SubredditsResultFragment
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         })
         mainActivityViewModel.selectedSubreddit.observe(this, Observer {
             supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
+        })
+        mainActivityViewModel.selectedURL.observe(this, Observer {
+            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, DetailedPostFragment.newInstance()).commit()
         })
     }
 
