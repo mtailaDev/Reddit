@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.matthewtaila.redditstockx.databinding.ActivityMainBinding
+import com.example.matthewtaila.redditstockx.feed.RedditPostFeedFragment
+import com.example.matthewtaila.redditstockx.subreddits.SubredditsResultFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -20,7 +23,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mainActivityViewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
         setOnClickListeners()
-        // todo - observeLiveData
+        showFeedFragment()
+        observeLiveData()
+    }
+
+    private fun showFeedFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
     }
 
     private fun setOnClickListeners() {
@@ -37,11 +45,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun ObserveLiveData(){
-        // todo - observe subReddit live data
-        // todo - check if fragment hosting subreddits is at the top of frag stack
-        // todo - if it's not, then create a new instance passing in 'it'
-        // todo - if it's is, do nothing because the fragment will be observing this value too, and it will refresh list
+    private fun observeLiveData(){
+        mainActivityViewModel.subReddit.observe(this, Observer {
+            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, SubredditsResultFragment.newInstance()).commit()
+        })
+        mainActivityViewModel.selectedSubreddit.observe(this, Observer {
+            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
+        })
     }
 
 }

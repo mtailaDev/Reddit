@@ -62,7 +62,4 @@ dependencies {
     implementation 'org.koin:koin-android:1.0.1'
     implementation 'org.koin:koin-android-viewmodel:1.0.1'
 
-    // navigation
-    implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha07"
-    implementation "android.arch.navigation:navigation-ui:1.0.0-alpha07"
 }

@@ -11,10 +11,9 @@ import org.koin.standalone.inject
 
 class MainActivityViewModel : ViewModel(), KoinComponent{
 
-
-
     val subReddit = MutableLiveData<String>()
     val selectedURL = MutableLiveData<String>()
+    val selectedSubreddit = MutableLiveData<String>()
 
     fun handleSelectedPost(url : String){
         selectedURL.value = url
@@ -22,5 +21,9 @@ class MainActivityViewModel : ViewModel(), KoinComponent{
 
     fun handleSubRedditSearchValue(searchTerm: String) {
         subReddit.value = searchTerm
+    }
+
+    fun selectSubreddit(sub : String){
+        selectedSubreddit.value = sub
     }
 }

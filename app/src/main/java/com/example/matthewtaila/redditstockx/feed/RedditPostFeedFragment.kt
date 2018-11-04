@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
@@ -27,6 +26,13 @@ class RedditPostFeedFragment : Fragment() {
     private lateinit var mBinding: FragmentRedditPostFeedBinding
     private lateinit var redditPostViewModel: RedditFeedViewModel
     private lateinit var mainActivityViewModel: MainActivityViewModel
+
+    companion object {
+        @JvmStatic
+        fun newInstance(): RedditPostFeedFragment {
+            return RedditPostFeedFragment()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,15 @@ class RedditPostFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoadingState()
-        redditPostViewModel.getPosts()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainActivityViewModel.subReddit.value?.let {
+            redditPostViewModel.getSubPosts(it, "hot")
+        } ?: kotlin.run {
+            redditPostViewModel.getPosts()
+        }
     }
 
     private fun showLoadingState() {
@@ -51,20 +65,18 @@ class RedditPostFeedFragment : Fragment() {
         feed_rv_posts.visibility = View.GONE
     }
 
-    private fun hideLoadingState(){
-
+    private fun hideLoadingState() {
         val animatorSet = AnimatorSet()
         val hideLottieAnimation = ObjectAnimator.ofFloat(feed_lav_loading, View.ALPHA, 1f, 0f)
         val showRVAnimation = ObjectAnimator.ofFloat(feed_rv_posts, View.ALPHA, 0f, 1f)
         animatorSet.playTogether(hideLottieAnimation, showRVAnimation)
         animatorSet.interpolator = FastOutSlowInInterpolator()
         animatorSet.duration = 200
-        animatorSet.addListener(object : AnimatorListenerAdapter(){
+        animatorSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 super.onAnimationEnd(animation)
                 feed_lav_loading.visibility = View.GONE
             }
-
             override fun onAnimationStart(animation: Animator?) {
                 super.onAnimationStart(animation)
                 feed_rv_posts.visibility = View.VISIBLE
@@ -73,19 +85,12 @@ class RedditPostFeedFragment : Fragment() {
         animatorSet.start()
     }
 
-
     fun observeLiveData() {
         redditPostViewModel.postList.observe(this, Observer {
-            if (it.postDataList.isNotEmpty()){
+            if (it.postDataList.isNotEmpty()) {
                 hideLoadingState()
                 setupRecyclerView(it)
             }
-        })
-        mainActivityViewModel.selectedURL.observe(this, Observer {
-            Navigation.createNavigateOnClickListener(R.id.action_redditPostFeedFragment_to_detailedPostFragment, null).onClick(view)
-        })
-        mainActivityViewModel.subReddit.observe(this, Observer {
-            Navigation.createNavigateOnClickListener(R.id.action_redditPostFeedFragment_to_subredditsResultFragment, null).onClick(view)
         })
     }
 
@@ -94,6 +99,5 @@ class RedditPostFeedFragment : Fragment() {
         feed_rv_posts.adapter = mAdapter
         feed_rv_posts.layoutManager = LinearLayoutManager(context)
     }
-
 
 }

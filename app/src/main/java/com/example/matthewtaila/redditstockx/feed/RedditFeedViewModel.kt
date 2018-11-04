@@ -23,13 +23,26 @@ class RedditFeedViewModel : ViewModel(), KoinComponent{
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                // todo log
                 postList.value = it
             }, {
-                // todo log
                 it.printStackTrace()
             })
 
     }
+
+    @SuppressLint("CheckResult")
+    fun getSubPosts(subReddit : String = "", ordering : String = "hot"){
+        redditApiServices.getSubFeed(subReddit, ordering)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                postList.value = it
+            }, {
+                it.printStackTrace()
+            })
+
+    }
+
+
 
 }

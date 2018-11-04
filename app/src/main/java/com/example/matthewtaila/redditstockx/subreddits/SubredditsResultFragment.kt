@@ -23,6 +23,13 @@ class SubredditsResultFragment : Fragment() {
     private lateinit var subredditsSearchViewModel: SubredditsSearchViewModel
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
+    companion object {
+        @JvmStatic
+        fun newInstance() : SubredditsResultFragment{
+            return SubredditsResultFragment()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subredditsSearchViewModel = ViewModelProviders.of(this)[SubredditsSearchViewModel::class.java]
@@ -38,13 +45,17 @@ class SubredditsResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoadingState()
-        subredditsSearchViewModel.searchSubreddits(mainActivityViewModel.subReddit.value)
     }
 
     private fun showLoadingState() {
         subreddit_rv_results.visibility = View.INVISIBLE
         subreddit_tv_error.visibility = View.GONE
         subreddit_lav_loading.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        subredditsSearchViewModel.searchSubreddits(mainActivityViewModel.subReddit.value)
     }
 
     private fun observeLiveData() {
