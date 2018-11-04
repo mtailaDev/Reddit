@@ -16,10 +16,10 @@ class ConnectivityInterceptor : Interceptor, KoinComponent {
         return chain.proceed(chain.request())
     }
 
-    class NoConnectionError(message: String) : Throwable(message)
-
     private fun hasConnection(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
     }
+
+    inner class NoConnectionError(message: String) : Throwable(message)
 }
