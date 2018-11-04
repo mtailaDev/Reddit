@@ -48,13 +48,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun observeLiveData(){
         mainActivityViewModel.subReddit.observe(this, Observer {
-            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, SubredditsResultFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_fragmentContainer, SubredditsResultFragment.newInstance())
+                .commit()
         })
         mainActivityViewModel.selectedSubreddit.observe(this, Observer {
-            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance())
+                .commit()
         })
         mainActivityViewModel.selectedURL.observe(this, Observer {
-            supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, DetailedPostFragment.newInstance()).commit()
+            supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.main_fragmentContainer, DetailedPostFragment.newInstance())
+                .commit()
         })
     }
 
