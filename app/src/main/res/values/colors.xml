@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d84315</color>
+
+    <!--// ordering text color-->
+    <color name="ordering_inactive">#48000000</color>
+    <color name="ordering_active">@android:color/black</color>
+    <color name="ordering_selected">#d84315</color>
 </resources>

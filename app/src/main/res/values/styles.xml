@@ -14,4 +14,14 @@
         <item name="cardElevation">@dimen/list_item_container_elevation</item>
     </style>
 
+    <style name="OrderingTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/ordering_tv_padding</item>
+        <item name="android:textSize">@dimen/ordering_tv_font_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/ordering_active</item>
+    </style>
+
+
 </resources>

@@ -27,4 +27,7 @@
     <dimen name="subreddit_text_views_margin_start">16dp</dimen>
     <dimen name="subreddit_text_views_margin_end">16dp</dimen>
 
+    <dimen name="ordering_tv_padding">8dp</dimen>
+    <dimen name="ordering_tv_font_size">14sp</dimen>
+
 </resources>

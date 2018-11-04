@@ -46,6 +46,63 @@
                         android:paddingEnd="8dp"
                         android:paddingStart="8dp"/>
 
+                <TextView
+                        android:id="@+id/main_tv_orderHot"
+                        style="@style/OrderingTheme"
+                        android:text="@string/ordering_hot"
+                        android:textColor="@color/ordering_selected"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/main_tv_orderTop"
+                        app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+                <TextView
+                        android:id="@+id/main_tv_orderTop"
+                        style="@style/OrderingTheme"
+                        app:layout_constraintStart_toEndOf="@+id/main_tv_orderHot"
+                        app:layout_constraintEnd_toStartOf="@+id/main_tv_orderControversial"
+                        android:text="@string/ordering_top"
+                        app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                        app:layout_constraintTop_toTopOf="@+id/main_tv_orderHot"/>
+
+                <TextView
+                        android:id="@+id/main_tv_orderControversial"
+                        style="@style/OrderingTheme"
+                        app:layout_constraintStart_toEndOf="@+id/main_tv_orderTop"
+                        app:layout_constraintEnd_toStartOf="@+id/main_tv_orderRising"
+                        android:text="@string/ordering_controversial"
+                        app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                        app:layout_constraintTop_toTopOf="@+id/main_tv_orderHot"/>
+
+                <TextView
+                        android:id="@+id/main_tv_orderRising"
+                        style="@style/OrderingTheme"
+                        app:layout_constraintStart_toEndOf="@+id/main_tv_orderControversial"
+                        app:layout_constraintEnd_toStartOf="@+id/main_tv_orderNew"
+                        android:text="@string/ordering_rising"
+                        app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                        app:layout_constraintTop_toTopOf="@+id/main_tv_orderHot"/>
+
+                <TextView
+                        android:id="@+id/main_tv_orderNew"
+                        style="@style/OrderingTheme"
+                        app:layout_constraintStart_toEndOf="@+id/main_tv_orderRising"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/ordering_new"
+                        app:layout_constraintTop_toBottomOf="@+id/main_et_subredditValue"
+                        app:layout_constraintTop_toTopOf="@+id/main_tv_orderHot"/>
+
+                <androidx.constraintlayout.widget.Group
+                        android:id="@+id/main_ordering_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="main_tv_orderNew,
+                        main_tv_orderHot,
+                        main_tv_orderTop,
+                        main_tv_orderRising,
+                        main_tv_orderControversial"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 

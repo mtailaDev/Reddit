@@ -6,4 +6,11 @@
     <string name="search_box_empty_error">Oops, looks like you left this empty</string>
     <string name="subreddit_search_no_resutls">Oops, we can\'t find a subreddit matching your search results. Please check your spelling</string>
 
+    <!--// ordering string resources-->
+    <string name="ordering_hot">Hot</string>
+    <string name="ordering_top">Top</string>
+    <string name="ordering_controversial">Controversial</string>
+    <string name="ordering_rising">Rising</string>
+    <string name="ordering_new">New</string>
+
 </resources>

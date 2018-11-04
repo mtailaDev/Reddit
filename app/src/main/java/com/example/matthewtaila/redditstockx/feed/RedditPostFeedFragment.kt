@@ -53,8 +53,9 @@ class RedditPostFeedFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        mainActivityViewModel.activateOrdering()
         mainActivityViewModel.subReddit.value?.let {
-            redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, "hot")
+            redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, mainActivityViewModel.order.value!!)
         } ?: kotlin.run {
             redditPostViewModel.getPosts()
         }
@@ -90,6 +91,11 @@ class RedditPostFeedFragment : Fragment() {
             if (it.postDataList.isNotEmpty()) {
                 hideLoadingState()
                 setupRecyclerView(it)
+            }
+        })
+        mainActivityViewModel.order.observe(this, Observer {
+            mainActivityViewModel.subReddit.value?.let {
+                redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, mainActivityViewModel.order.value!!)
             }
         })
     }
