@@ -76,11 +76,12 @@ class RedditPostFeedFragment : Fragment() {
         animatorSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 super.onAnimationEnd(animation)
-                feed_lav_loading.visibility = View.GONE
+                feed_lav_loading?.let { it.visibility = View.GONE }
             }
             override fun onAnimationStart(animation: Animator?) {
                 super.onAnimationStart(animation)
-                feed_rv_posts.visibility = View.VISIBLE
+
+                feed_rv_posts.let { it.visibility = View.VISIBLE }
             }
         })
         animatorSet.start()
