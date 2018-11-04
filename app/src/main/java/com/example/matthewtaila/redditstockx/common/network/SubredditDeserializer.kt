@@ -8,18 +8,22 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import java.lang.reflect.Type
 
-class SubredditDeserializer : JsonDeserializer<SubredditSearchResult>{
+class SubredditDeserializer : JsonDeserializer<SubredditSearchResult> {
 
-    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): SubredditSearchResult {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): SubredditSearchResult {
         val jsonObject = json?.asJsonObject?.get("data")?.asJsonObject?.get("children")?.asJsonArray
 
         var subredditList: MutableList<Subreddit> = mutableListOf()
 
         jsonObject?.forEach {
-            var thumbnailUrl : String? = null
+            var thumbnailUrl: String? = null
             try {
                 thumbnailUrl = it.asJsonObject.get("data")?.asJsonObject?.get("community_icon")?.asString
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("subredditDeserializer", e.localizedMessage, e)
             }
             val sub = Subreddit(

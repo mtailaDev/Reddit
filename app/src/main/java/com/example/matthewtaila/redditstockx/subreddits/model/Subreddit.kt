@@ -4,6 +4,8 @@ import com.example.matthewtaila.redditstockx.common.network.SubredditDeserialize
 import com.google.gson.annotations.JsonAdapter
 
 @JsonAdapter(SubredditDeserializer::class)
-class Subreddit (val prefixed_name: String?,
-                 val thumbnail: String?,
-                 val numberOfSubscribers: Int?)
+class Subreddit(
+    val prefixed_name: String?,
+    val thumbnail: String?,
+    val numberOfSubscribers: Int?
+)

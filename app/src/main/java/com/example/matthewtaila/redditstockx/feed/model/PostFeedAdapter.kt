@@ -9,7 +9,8 @@ import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
 import com.example.matthewtaila.redditstockx.databinding.ListItemRedditPostBinding
 
-class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

@@ -19,13 +19,13 @@ import kotlinx.android.synthetic.main.fragment_subreddits_result_fragment.*
 
 class SubredditsResultFragment : Fragment() {
 
-    private lateinit var mBinding : FragmentSubredditsResultFragmentBinding
+    private lateinit var mBinding: FragmentSubredditsResultFragmentBinding
     private lateinit var subredditsSearchViewModel: SubredditsSearchViewModel
     private lateinit var mainActivityViewModel: MainActivityViewModel
 
     companion object {
         @JvmStatic
-        fun newInstance() : SubredditsResultFragment{
+        fun newInstance(): SubredditsResultFragment {
             return SubredditsResultFragment()
         }
     }
@@ -64,7 +64,7 @@ class SubredditsResultFragment : Fragment() {
             if (it.dataList.isNotEmpty()) {
                 hideLoadingState()
                 setupRecyclerView(it)
-            }else {
+            } else {
                 hideLoadingState()
                 showEmptyErrorState()
             }

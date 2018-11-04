@@ -1,15 +1,10 @@
 package com.example.matthewtaila.redditstockx
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.matthewtaila.redditstockx.common.network.IRedditAPI
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
 
-class MainActivityViewModel : ViewModel(), KoinComponent{
+class MainActivityViewModel : ViewModel(), KoinComponent {
 
     val subReddit = MutableLiveData<String>()
     val selectedURL = MutableLiveData<String>()
@@ -17,7 +12,7 @@ class MainActivityViewModel : ViewModel(), KoinComponent{
     val orderingActive = MutableLiveData<Boolean>()
     val order = MutableLiveData<String>()
 
-    fun selectDetailedPost(url : String){
+    fun selectDetailedPost(url: String) {
         selectedURL.value = url
     }
 
@@ -25,19 +20,19 @@ class MainActivityViewModel : ViewModel(), KoinComponent{
         subReddit.value = searchTerm
     }
 
-    fun selectSubreddit(sub : String){
+    fun selectSubreddit(sub: String) {
         selectedSubreddit.value = sub
     }
 
-    fun inactiveOrdering(){
+    fun inactiveOrdering() {
         orderingActive.value = false
     }
 
-    fun activateOrdering(){
+    fun activateOrdering() {
         orderingActive.value = true
     }
 
-    sealed class Ordering(val order: String){
+    sealed class Ordering(val order: String) {
         object Hot : Ordering("hot")
         object Top : Ordering("top")
         object Controversial : Ordering("controversial")

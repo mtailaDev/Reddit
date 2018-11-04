@@ -55,7 +55,10 @@ class RedditPostFeedFragment : Fragment() {
         super.onResume()
         mainActivityViewModel.activateOrdering()
         mainActivityViewModel.subReddit.value?.let {
-            redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, mainActivityViewModel.order.value!!)
+            redditPostViewModel.getSubPosts(
+                mainActivityViewModel.selectedSubreddit.value!!,
+                mainActivityViewModel.order.value!!
+            )
         } ?: kotlin.run {
             redditPostViewModel.getPosts()
         }
@@ -78,6 +81,7 @@ class RedditPostFeedFragment : Fragment() {
                 super.onAnimationEnd(animation)
                 feed_lav_loading?.let { it.visibility = View.GONE }
             }
+
             override fun onAnimationStart(animation: Animator?) {
                 super.onAnimationStart(animation)
 
@@ -96,7 +100,10 @@ class RedditPostFeedFragment : Fragment() {
         })
         mainActivityViewModel.order.observe(this, Observer {
             mainActivityViewModel.subReddit.value?.let {
-                redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, mainActivityViewModel.order.value!!)
+                redditPostViewModel.getSubPosts(
+                    mainActivityViewModel.selectedSubreddit.value!!,
+                    mainActivityViewModel.order.value!!
+                )
             }
         })
     }

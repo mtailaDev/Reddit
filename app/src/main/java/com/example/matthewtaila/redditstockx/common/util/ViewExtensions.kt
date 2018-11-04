@@ -14,14 +14,14 @@ fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
 
 fun Group.resetOrderingTextViews() {
     referencedIds.forEach { id ->
-        val orderingTextView : TextView = rootView.findViewById(id)
+        val orderingTextView: TextView = rootView.findViewById(id)
         orderingTextView.setTextColor(ContextCompat.getColor(this.context, R.color.ordering_active))
     }
 }
 
 fun Group.inactiveOrderingTextView() {
     referencedIds.forEach { id ->
-        val orderingTextView : TextView = rootView.findViewById(id)
+        val orderingTextView: TextView = rootView.findViewById(id)
         orderingTextView.setTextColor(ContextCompat.getColor(this.context, R.color.ordering_inactive))
     }
 }

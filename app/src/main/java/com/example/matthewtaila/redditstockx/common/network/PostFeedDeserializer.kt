@@ -16,10 +16,10 @@ class PostFeedDeserializer : JsonDeserializer<PostFeed> {
         var postDataList: MutableList<Post> = mutableListOf()
 
         jsonObject?.forEach {
-            var thumbnailControl : Int? = null
+            var thumbnailControl: Int? = null
             try {
                 thumbnailControl = it.asJsonObject.get("data")?.asJsonObject?.get("thumbnail_width")?.asInt
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("PostDeserializer", e.localizedMessage, e)
             }
             val post = Post(

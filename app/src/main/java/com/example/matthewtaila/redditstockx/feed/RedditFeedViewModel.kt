@@ -10,14 +10,14 @@ import io.reactivex.schedulers.Schedulers
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
-class RedditFeedViewModel : ViewModel(), KoinComponent{
+class RedditFeedViewModel : ViewModel(), KoinComponent {
 
-    private val redditApiServices : IRedditAPI by inject()
+    private val redditApiServices: IRedditAPI by inject()
 
     val postList = MutableLiveData<PostFeed>()
 
     @SuppressLint("CheckResult")
-    fun getPosts(subReddit : String = "", ordering : String = "hot"){
+    fun getPosts(subReddit: String = "", ordering: String = "hot") {
 
         redditApiServices.getFeed(ordering)
             .subscribeOn(Schedulers.io())
@@ -31,7 +31,7 @@ class RedditFeedViewModel : ViewModel(), KoinComponent{
     }
 
     @SuppressLint("CheckResult")
-    fun getSubPosts(subReddit : String = "", ordering : String = "hot"){
+    fun getSubPosts(subReddit: String = "", ordering: String = "hot") {
         redditApiServices.getSubFeed(subReddit, ordering)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

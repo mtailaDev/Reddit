@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showFeedFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragmentContainer, RedditPostFeedFragment.newInstance()).commit()
     }
 
     override fun onResume() {
@@ -49,31 +50,31 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun activateOrderingGroupListener() {
         mainActivityViewModel.orderingActive.value?.let {
-                main_ordering_group.setAllOnClickListener(View.OnClickListener {
-                    main_ordering_group.resetOrderingTextViews()
-                    when (it.id){
-                        R.id.main_tv_orderHot ->{
-                            main_tv_orderHot.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
-                            mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Hot.order
-                        }
-                        R.id.main_tv_orderTop ->{
-                            main_tv_orderTop.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
-                            mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Top.order
-                        }
-                        R.id.main_tv_orderNew ->{
-                            main_tv_orderNew.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
-                            mainActivityViewModel.order.value = MainActivityViewModel.Ordering.New.order
-                        }
-                        R.id.main_tv_orderControversial ->{
-                            main_tv_orderControversial.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
-                            mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Controversial.order
-                        }
-                        R.id.main_tv_orderRising ->{
-                            main_tv_orderRising.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
-                            mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Rising.order
-                        }
+            main_ordering_group.setAllOnClickListener(View.OnClickListener {
+                main_ordering_group.resetOrderingTextViews()
+                when (it.id) {
+                    R.id.main_tv_orderHot -> {
+                        main_tv_orderHot.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
+                        mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Hot.order
                     }
-                })
+                    R.id.main_tv_orderTop -> {
+                        main_tv_orderTop.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
+                        mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Top.order
+                    }
+                    R.id.main_tv_orderNew -> {
+                        main_tv_orderNew.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
+                        mainActivityViewModel.order.value = MainActivityViewModel.Ordering.New.order
+                    }
+                    R.id.main_tv_orderControversial -> {
+                        main_tv_orderControversial.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
+                        mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Controversial.order
+                    }
+                    R.id.main_tv_orderRising -> {
+                        main_tv_orderRising.setTextColor(ContextCompat.getColor(this, R.color.ordering_selected))
+                        mainActivityViewModel.order.value = MainActivityViewModel.Ordering.Rising.order
+                    }
+                }
+            })
         }
     }
 
@@ -82,8 +83,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        when (view.id){
-            R.id.main_iv_subredditSearch ->{
+        when (view.id) {
+            R.id.main_iv_subredditSearch -> {
                 if (main_et_subredditValue.text.toString().isNotEmpty())
                     mainActivityViewModel.handleSubRedditSearchValue(main_et_subredditValue.text.toString())
                 else Toast.makeText(this, getString(R.string.search_box_empty_error), Toast.LENGTH_LONG).show()
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun observeLiveData(){
+    private fun observeLiveData() {
         mainActivityViewModel.subReddit.observe(this, Observer {
             supportFragmentManager.beginTransaction()
                 .addToBackStack(null)

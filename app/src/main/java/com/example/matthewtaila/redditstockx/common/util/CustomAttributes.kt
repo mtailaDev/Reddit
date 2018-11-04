@@ -10,7 +10,7 @@ import com.example.matthewtaila.redditstockx.R
 
 @BindingAdapter("showThumbnail", "thumbnail")
 fun ImageView.showThumbnail(control: Int?, url: String?) {
-    if (control == null){
+    if (control == null) {
         this.visibility = View.GONE
     } else {
         this.visibility = View.VISIBLE
@@ -25,7 +25,7 @@ fun TextView.postScore(score: Int?) {
 
 @BindingAdapter("appendSubreddit")
 fun TextView.appendSubreddit(sub: String?) {
-    this.text = "r/"+sub
+    this.text = "r/" + sub
 }
 
 @BindingAdapter("subredditTitle")
@@ -40,7 +40,7 @@ fun TextView.subredditSubscribers(subscribers: Int?) {
 
 @BindingAdapter("icon")
 fun ImageView.subredditIcon(url: String?) {
-    if (url!!.isEmpty()){
+    if (url!!.isEmpty()) {
         Glide.with(this.context).load(R.drawable.reddit_stub).apply(RequestOptions.circleCropTransform()).into(this)
     } else {
         Glide.with(this.context).load(url).apply(RequestOptions.circleCropTransform()).into(this)
