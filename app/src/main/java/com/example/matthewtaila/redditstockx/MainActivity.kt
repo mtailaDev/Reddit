@@ -17,7 +17,7 @@ import com.example.matthewtaila.redditstockx.feed.RedditPostFeedFragment
 import com.example.matthewtaila.redditstockx.subreddits.SubredditsResultFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
 
 
     private lateinit var mBinding: ActivityMainBinding
@@ -79,16 +79,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setOnClickListeners() {
-        main_iv_subredditSearch.setOnClickListener(this)
-    }
-
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.main_iv_subredditSearch -> {
-                if (main_et_subredditValue.text.toString().isNotEmpty())
-                    mainActivityViewModel.handleSubRedditSearchValue(main_et_subredditValue.text.toString())
-                else Toast.makeText(this, getString(R.string.search_box_empty_error), Toast.LENGTH_LONG).show()
-            }
+        main_iv_subredditSearch.setOnClickListener{
+            if (main_et_subredditValue.text.toString().isNotEmpty())
+                mainActivityViewModel.handleSubRedditSearchValue(main_et_subredditValue.text.toString())
+            else Toast.makeText(this, getString(R.string.search_box_empty_error), Toast.LENGTH_LONG).show()
         }
     }
 
