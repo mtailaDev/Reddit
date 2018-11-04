@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
@@ -16,7 +19,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
+import com.example.matthewtaila.redditstockx.common.util.setAllOnClickListener
 import com.example.matthewtaila.redditstockx.databinding.FragmentRedditPostFeedBinding
+import com.example.matthewtaila.redditstockx.feed.model.Ordering
 import com.example.matthewtaila.redditstockx.feed.model.PostFeed
 import com.example.matthewtaila.redditstockx.feed.model.PostFeedAdapter
 import kotlinx.android.synthetic.main.fragment_reddit_post_feed.*
@@ -38,6 +43,7 @@ class RedditPostFeedFragment : Fragment() {
         super.onCreate(savedInstanceState)
         redditPostViewModel = ViewModelProviders.of(this)[RedditFeedViewModel::class.java]
         mainActivityViewModel = ViewModelProviders.of(activity!!)[MainActivityViewModel::class.java]
+        redditPostViewModel.order.value = Ordering.Hot.order
         observeLiveData()
     }
 
@@ -49,15 +55,44 @@ class RedditPostFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showLoadingState()
+        setOrderingTabClickListener()
+    }
+
+    private fun setOrderingTabClickListener() {
+        feed_ordering_group.setAllOnClickListener(View.OnClickListener {
+                            feed_ordering_group.resetOrderingTextViews()
+                when (it.id) {
+                    R.id.feed_tv_orderHot -> {
+                        feed_tv_orderHot.setTextColor(ContextCompat.getColor(requireContext(), R.color.ordering_selected))
+                        redditPostViewModel.order.value = Ordering.Hot.order
+                    }
+                    R.id.feed_tv_orderTop -> {
+                        feed_tv_orderTop.setTextColor(ContextCompat.getColor(requireContext(), R.color.ordering_selected))
+                        redditPostViewModel.order.value = Ordering.Top.order
+                    }
+                    R.id.feed_tv_orderNew -> {
+                        feed_tv_orderNew.setTextColor(ContextCompat.getColor(requireContext(), R.color.ordering_selected))
+                        redditPostViewModel.order.value = Ordering.New.order
+                    }
+                    R.id.feed_tv_orderControversial -> {
+                        feed_tv_orderControversial.setTextColor(ContextCompat.getColor(requireContext(), R.color.ordering_selected))
+                        redditPostViewModel.order.value = Ordering.Controversial.order
+                    }
+                    R.id.feed_tv_orderRising -> {
+                        feed_tv_orderRising.setTextColor(ContextCompat.getColor(requireContext(), R.color.ordering_selected))
+                        redditPostViewModel.order.value = Ordering.Rising.order
+                    }
+                }
+            })
     }
 
     override fun onResume() {
         super.onResume()
-        mainActivityViewModel.activateOrdering()
+        // todo - change location
         mainActivityViewModel.subReddit.value?.let {
             redditPostViewModel.getSubPosts(
                 mainActivityViewModel.selectedSubreddit.value!!,
-                mainActivityViewModel.order.value!!
+                redditPostViewModel.order.value!!
             )
         } ?: kotlin.run {
             redditPostViewModel.getPosts()
@@ -98,11 +133,11 @@ class RedditPostFeedFragment : Fragment() {
                 setupRecyclerView(it)
             }
         })
-        mainActivityViewModel.order.observe(this, Observer {
+        redditPostViewModel.order.observe(this, Observer {
             mainActivityViewModel.subReddit.value?.let {
                 redditPostViewModel.getSubPosts(
                     mainActivityViewModel.selectedSubreddit.value!!,
-                    mainActivityViewModel.order.value!!
+                    redditPostViewModel.order.value!!
                 )
             }
         })
@@ -112,6 +147,14 @@ class RedditPostFeedFragment : Fragment() {
         val mAdapter = PostFeedAdapter(postFeed, mainActivityViewModel)
         feed_rv_posts.adapter = mAdapter
         feed_rv_posts.layoutManager = LinearLayoutManager(context)
+    }
+
+
+    fun Group.resetOrderingTextViews() {
+        referencedIds.forEach { id ->
+            val orderingTextView: TextView = rootView.findViewById(id)
+            orderingTextView.setTextColor(ContextCompat.getColor(this.context, R.color.ordering_active))
+        }
     }
 
 }

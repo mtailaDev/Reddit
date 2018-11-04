@@ -15,6 +15,7 @@ class RedditFeedViewModel : ViewModel(), KoinComponent {
     private val redditApiServices: IRedditAPI by inject()
 
     val postList = MutableLiveData<PostFeed>()
+    val order = MutableLiveData<String>()
 
     @SuppressLint("CheckResult")
     fun getPosts(subReddit: String = "", ordering: String = "hot") {

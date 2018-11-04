@@ -55,7 +55,6 @@ class SubredditsResultFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mainActivityViewModel.inactiveOrdering()
         subredditsSearchViewModel.searchSubreddits(mainActivityViewModel.subReddit.value)
     }
 

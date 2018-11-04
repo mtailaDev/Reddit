@@ -37,11 +37,6 @@ class DetailedPostFragment : Fragment() {
         showWebView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        mainActivityViewModel.inactiveOrdering()
-    }
-
     private fun showWebView() {
         detailedFrag_wv_url.settings.javaScriptEnabled = true
         detailedFrag_wv_url.settings.domStorageEnabled = true
