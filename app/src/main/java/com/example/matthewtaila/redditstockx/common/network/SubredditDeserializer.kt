@@ -17,7 +17,7 @@ class SubredditDeserializer : JsonDeserializer<SubredditSearchResult> {
     ): SubredditSearchResult {
         val jsonObject = json?.asJsonObject?.get("data")?.asJsonObject?.get("children")?.asJsonArray
 
-        var subredditList: MutableList<Subreddit> = mutableListOf()
+        var subredditList: ArrayList<Subreddit> = arrayListOf()
 
         jsonObject?.forEach {
             var thumbnailUrl: String? = null

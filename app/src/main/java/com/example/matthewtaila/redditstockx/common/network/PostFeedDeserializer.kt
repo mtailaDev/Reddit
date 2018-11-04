@@ -13,7 +13,7 @@ class PostFeedDeserializer : JsonDeserializer<PostFeed> {
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): PostFeed {
         val jsonObject = json?.asJsonObject?.get("data")?.asJsonObject?.get("children")?.asJsonArray
 
-        var postDataList: MutableList<Post> = mutableListOf()
+        var postDataList: ArrayList<Post> = arrayListOf()
 
         jsonObject?.forEach {
             var thumbnailControl: Int? = null
