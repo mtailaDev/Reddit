@@ -54,7 +54,7 @@ class RedditPostFeedFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mainActivityViewModel.subReddit.value?.let {
-            redditPostViewModel.getSubPosts(it, "hot")
+            redditPostViewModel.getSubPosts(mainActivityViewModel.selectedSubreddit.value!!, "hot")
         } ?: kotlin.run {
             redditPostViewModel.getPosts()
         }
