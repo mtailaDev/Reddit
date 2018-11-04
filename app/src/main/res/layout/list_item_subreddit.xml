@@ -3,9 +3,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.example.matthewtaila.redditstockx.R"/>
         <variable
-                name="subreddit"
-                type="com.example.matthewtaila.redditstockx.subreddits.model.Subreddit"/>
+                name="uiSubreddit"
+                type="com.example.matthewtaila.redditstockx.subreddits.model.UISubreddit"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -22,7 +23,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    icon="@{subreddit.thumbnail}"
+                    app:glideSrc="@{uiSubreddit.thumbnail}"
+                    app:placeholder="@{R.drawable.reddit_stub}"
+                    app:circle="@{true}"
                     android:layout_margin="@dimen/subreddit_thumbnail_margin"/>
 
             <ImageView
@@ -46,7 +49,7 @@
                     android:layout_marginEnd="@dimen/subreddit_text_views_margin_end"
                     android:layout_marginTop="8dp"
                     android:maxLines="1"
-                    subredditTitle="@{subreddit.prefixed_name}"
+                    android:text="@{uiSubreddit.name}"
                     android:ellipsize="end"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/list_item_title_text_size"/>
@@ -61,7 +64,7 @@
                     android:layout_marginStart="@dimen/subreddit_text_views_margin_start"
                     android:layout_marginEnd="@dimen/subreddit_text_views_margin_end"
                     android:layout_marginBottom="8dp"
-                    subredditSubscribers="@{subreddit.numberOfSubscribers}"
+                    android:text="@{uiSubreddit.subscribersAsString()}"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
@@ -70,6 +73,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-
 </layout>

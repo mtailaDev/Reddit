@@ -5,8 +5,9 @@
     <data>
 
         <variable
-                name="post"
-                type="com.example.matthewtaila.redditstockx.feed.model.Post"/>
+                name="uiPost"
+                type="com.example.matthewtaila.redditstockx.feed.model.UIPost"/>
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -25,9 +26,8 @@
                     android:layout_margin="@dimen/post_margin"
                     android:scaleType="centerCrop"
                     tools:visibility="gone"
-                    android:visibility="gone"
-                    showThumbnail="@{post.thumbnailControl}"
-                    thumbnail="@{post.thumbnail}"
+                    android:visibility="@{uiPost.thumbnailVisiblity()}"
+                    app:glideSrc="@{uiPost.thumbnail}"
                     app:layout_constraintVertical_chainStyle="spread"/>
 
             <androidx.constraintlayout.widget.Guideline
@@ -59,7 +59,7 @@
                     android:layout_marginTop="@dimen/post_title_margin_top"
                     android:layout_marginEnd="@dimen/post_title_margin_end"
                     android:maxLines="3"
-                    android:text="@{post.title}"
+                    android:text="@{uiPost.title}"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/list_item_title_text_size"/>
@@ -77,7 +77,7 @@
                     android:layout_marginBottom="@dimen/post_subreddit_margin_bottom"
                     android:layout_marginEnd="@dimen/post_subreddit_margin_end"
                     android:maxLines="1"
-                    appendSubreddit="@{post.subreddit}"
+                    android:text="@{uiPost.subreddit}"
                     android:ellipsize="end"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/list_item_sub_title_text_size"/>
@@ -91,12 +91,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:maxLines="1"
-                    postScore="@{post.score}"
+                    android:text="@{uiPost.scoreAsString()}"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/list_item_sub_title_text_size"
                     android:layout_margin="@dimen/post_score_value_margin"
-                    android:text="1234"
                     android:textAlignment="center"/>
 
             <!--// todo - up and down chevron-->

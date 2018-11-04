@@ -11,23 +11,26 @@ import java.lang.reflect.Type
 class PostFeedDeserializer : JsonDeserializer<PostFeed> {
 
     override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): PostFeed {
-        val jsonObject = json?.asJsonObject?.get("data")?.asJsonObject?.get("children")?.asJsonArray
+        val jsonObject = json?.asJsonObject?.getAsJsonObject("data")?.getAsJsonArray("children")
 
         var postDataList: ArrayList<Post> = arrayListOf()
 
         jsonObject?.forEach {
+            val postJson = it.asJsonObject.getAsJsonObject("data")
             var thumbnailControl: Int? = null
+            var thumbnail: String? = null
             try {
-                thumbnailControl = it.asJsonObject.get("data")?.asJsonObject?.get("thumbnail_width")?.asInt
+                thumbnailControl = postJson.get("thumbnail_width")?.asInt
+                thumbnail = postJson.get("thumbnail")?.asString
             } catch (e: Exception) {
                 Log.e("PostDeserializer", e.localizedMessage, e)
             }
             val post = Post(
-                subreddit = it.asJsonObject?.get("data")?.asJsonObject?.get("subreddit")?.asString,
-                url = it.asJsonObject?.get("data")?.asJsonObject?.get("url")?.asString,
-                title = it.asJsonObject?.get("data")?.asJsonObject?.get("title")?.asString,
-                score = it.asJsonObject?.get("data")?.asJsonObject?.get("score")?.asInt,
-                thumbnail = it.asJsonObject?.get("data")?.asJsonObject?.get("thumbnail")?.asString,
+                subreddit = postJson.get("subreddit")?.asString,
+                url = postJson.get("url")?.asString,
+                title = postJson.get("title").asString,
+                score = postJson.get("score").asInt,
+                thumbnail = thumbnail,
                 thumbnailControl = thumbnailControl
             )
             postDataList.add(post)

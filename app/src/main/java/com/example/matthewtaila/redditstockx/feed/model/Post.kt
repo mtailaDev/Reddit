@@ -7,8 +7,14 @@ import com.google.gson.annotations.JsonAdapter
 data class Post(
     var subreddit: String? = "",
     var url: String? = "",
-    var title: String? = "",
-    var score: Int? = 0,
+    var title: String = "",
+    var score: Int = 0,
     var thumbnail: String? = "",
     var thumbnailControl: Int? = 0
-)
+) {
+
+    fun map(): UIPost {
+        return UIPost(subreddit = "r/$subreddit", thumbnail = thumbnail, score = score, title = title)
+    }
+
+}

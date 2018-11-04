@@ -17,18 +17,19 @@ class SubredditDeserializer : JsonDeserializer<SubredditSearchResult> {
     ): SubredditSearchResult {
         val jsonObject = json?.asJsonObject?.get("data")?.asJsonObject?.get("children")?.asJsonArray
 
-        var subredditList: ArrayList<Subreddit> = arrayListOf()
+        val subredditList: ArrayList<Subreddit> = arrayListOf()
 
         jsonObject?.forEach {
+            val subredditJson = it.asJsonObject.getAsJsonObject("data")
             var thumbnailUrl: String? = null
             try {
-                thumbnailUrl = it.asJsonObject.get("data")?.asJsonObject?.get("community_icon")?.asString
+                thumbnailUrl = subredditJson.get("community_icon")?.asString
             } catch (e: Exception) {
                 Log.e("subredditDeserializer", e.localizedMessage, e)
             }
             val sub = Subreddit(
-                prefixed_name = it.asJsonObject?.get("data")?.asJsonObject?.get("display_name_prefixed")?.asString,
-                numberOfSubscribers = it.asJsonObject?.get("data")?.asJsonObject?.get("subscribers")?.asInt,
+                prefixed_name = subredditJson.get("display_name_prefixed").asString,
+                numberOfSubscribers = subredditJson.get("subscribers").asInt,
                 thumbnail = thumbnailUrl
             )
             subredditList.add(sub)

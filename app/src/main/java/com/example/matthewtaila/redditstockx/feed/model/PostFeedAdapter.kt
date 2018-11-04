@@ -29,7 +29,7 @@ class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val vh = holder as PostViewHolder
-        vh.bind(postFeed.postDataList[position])
+        vh.bind(postFeed.postDataList[position].map())
         vh.itemBinding.root.setOnClickListener {
             postFeed.postDataList[position].url?.let {
                 mainVM.selectDetailedPost(it)
@@ -38,10 +38,8 @@ class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel)
     }
 
     inner class PostViewHolder(val itemBinding: ListItemRedditPostBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(post: Post) {
-            // todo onclick listener
-            // todo icons in view
-            itemBinding.post = post
+        fun bind(post: UIPost) {
+            itemBinding.uiPost = post
         }
     }
 

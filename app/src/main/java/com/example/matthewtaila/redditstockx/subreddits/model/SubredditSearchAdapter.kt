@@ -27,7 +27,7 @@ class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mainV
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val vh = holder as SubredditViewHolder
-        vh.bind(searchResults.dataList[position])
+        vh.bind(searchResults.dataList[position].map())
         vh.itemBinding.root.setOnClickListener {
             searchResults.dataList[position].prefixed_name?.let {
                 mainVM.selectSubreddit(it)
@@ -37,8 +37,8 @@ class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mainV
 
     inner class SubredditViewHolder(val itemBinding: ListItemSubredditBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(sub: Subreddit) {
-            itemBinding.subreddit = sub
+        fun bind(uiSubreddit: UISubreddit) {
+            itemBinding.uiSubreddit = uiSubreddit
         }
     }
 }
