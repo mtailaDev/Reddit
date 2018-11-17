@@ -8,7 +8,7 @@ import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
 import com.example.matthewtaila.redditstockx.databinding.ListItemSubredditBinding
 
-class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mainVM: MainActivityViewModel) :
+class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mListener: OnSubredditSelectedListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,7 +30,7 @@ class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mainV
         vh.bind(searchResults.dataList[position].map())
         vh.itemBinding.root.setOnClickListener {
             searchResults.dataList[position].prefixed_name?.let {
-                mainVM.selectSubreddit(it)
+                mListener.onSubredditSelected(it)
             }
         }
     }
@@ -40,6 +40,10 @@ class SubredditSearchAdapter(val searchResults: SubredditSearchResult, val mainV
         fun bind(uiSubreddit: UISubreddit) {
             itemBinding.uiSubreddit = uiSubreddit
         }
+    }
+
+    interface OnSubredditSelectedListener{
+        fun onSubredditSelected(subreddit: String)
     }
 }
 

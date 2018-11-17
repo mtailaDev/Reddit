@@ -22,11 +22,12 @@ import com.example.matthewtaila.redditstockx.R
 import com.example.matthewtaila.redditstockx.common.util.setAllOnClickListener
 import com.example.matthewtaila.redditstockx.databinding.FragmentRedditPostFeedBinding
 import com.example.matthewtaila.redditstockx.feed.model.Ordering
+import com.example.matthewtaila.redditstockx.feed.model.Post
 import com.example.matthewtaila.redditstockx.feed.model.PostFeed
 import com.example.matthewtaila.redditstockx.feed.model.PostFeedAdapter
 import kotlinx.android.synthetic.main.fragment_reddit_post_feed.*
 
-class RedditPostFeedFragment : Fragment() {
+class RedditPostFeedFragment : Fragment(), PostFeedAdapter.PostSelectedListener {
 
     private lateinit var mBinding: FragmentRedditPostFeedBinding
     private lateinit var redditPostViewModel: RedditFeedViewModel
@@ -86,6 +87,8 @@ class RedditPostFeedFragment : Fragment() {
             })
     }
 
+
+
     override fun onResume() {
         super.onResume()
         // todo - change location
@@ -143,8 +146,12 @@ class RedditPostFeedFragment : Fragment() {
         })
     }
 
+    override fun onPostSelected(post: Post) {
+        mainActivityViewModel.selectedURL.value = post
+    }
+
     private fun setupRecyclerView(postFeed: PostFeed) {
-        val mAdapter = PostFeedAdapter(postFeed, mainActivityViewModel)
+        val mAdapter = PostFeedAdapter(postFeed, this)
         feed_rv_posts.adapter = mAdapter
         feed_rv_posts.layoutManager = LinearLayoutManager(context)
     }

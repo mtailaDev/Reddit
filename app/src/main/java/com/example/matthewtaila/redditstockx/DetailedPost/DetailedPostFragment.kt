@@ -45,7 +45,7 @@ class DetailedPostFragment : Fragment() {
                 return false
             }
         }
-        detailedFrag_wv_url.loadUrl(mainActivityViewModel.selectedURL.value)
+        detailedFrag_wv_url.loadUrl(mainActivityViewModel.selectedURL.value?.url)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

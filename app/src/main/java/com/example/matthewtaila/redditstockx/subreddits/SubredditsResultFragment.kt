@@ -17,7 +17,7 @@ import com.example.matthewtaila.redditstockx.subreddits.model.SubredditSearchRes
 import kotlinx.android.synthetic.main.fragment_subreddits_result_fragment.*
 
 
-class SubredditsResultFragment : Fragment() {
+class SubredditsResultFragment : Fragment(), SubredditSearchAdapter.OnSubredditSelectedListener {
 
     private lateinit var mBinding: FragmentSubredditsResultFragmentBinding
     private lateinit var subredditsSearchViewModel: SubredditsSearchViewModel
@@ -82,10 +82,14 @@ class SubredditsResultFragment : Fragment() {
     private fun setupRecyclerView(searchResult: SubredditSearchResult) {
         subreddit_rv_results.visibility = View.INVISIBLE
         subreddit_rv_results.alpha = 1f
-        val mAdapter = SubredditSearchAdapter(searchResult, mainActivityViewModel)
+        val mAdapter = SubredditSearchAdapter(searchResult, this)
         subreddit_rv_results.adapter = mAdapter
         subreddit_rv_results.layoutManager = LinearLayoutManager(context)
         subreddit_rv_results.visibility = View.VISIBLE
+    }
+
+    override fun onSubredditSelected(subreddit: String) {
+        mainActivityViewModel.selectSubreddit(subreddit)
     }
 
     private fun showEmptyErrorState() {

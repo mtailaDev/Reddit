@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.matthewtaila.redditstockx.MainActivityViewModel
 import com.example.matthewtaila.redditstockx.R
 import com.example.matthewtaila.redditstockx.databinding.ListItemRedditPostBinding
 
-class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel) :
+class PostFeedAdapter(val postFeed: PostFeed, val mListener: PostSelectedListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,9 +30,7 @@ class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel)
         val vh = holder as PostViewHolder
         vh.bind(postFeed.postDataList[position].map())
         vh.itemBinding.root.setOnClickListener {
-            postFeed.postDataList[position].url?.let {
-                mainVM.selectDetailedPost(it)
-            }
+            mListener.onPostSelected(postFeed.postDataList[position])
         }
     }
 
@@ -41,6 +38,10 @@ class PostFeedAdapter(val postFeed: PostFeed, val mainVM: MainActivityViewModel)
         fun bind(post: UIPost) {
             itemBinding.uiPost = post
         }
+    }
+
+    interface PostSelectedListener {
+        fun onPostSelected(post: Post)
     }
 
 }
