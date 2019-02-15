@@ -12,14 +12,12 @@ import org.koin.standalone.inject
 
 class RedditFeedViewModel : ViewModel(), KoinComponent {
 
-    private val redditApiServices: IRedditAPI by inject()
-
+    val redditApiServices: IRedditAPI by inject()
     val postList = MutableLiveData<PostFeed>()
     val order = MutableLiveData<String>()
 
     @SuppressLint("CheckResult")
     fun getPosts(subReddit: String = "", ordering: String = "hot") {
-
         redditApiServices.getFeed(ordering)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -28,7 +26,6 @@ class RedditFeedViewModel : ViewModel(), KoinComponent {
             }, {
                 it.printStackTrace()
             })
-
     }
 
     @SuppressLint("CheckResult")
